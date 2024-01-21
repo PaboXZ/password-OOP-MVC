@@ -7,6 +7,9 @@
         "psr-4": {
             "App\\": "src/App",
             "Framework\\": "src/Framework"
-        }
+        },
+        "files": [
+            "src/App/Config/Routes.php"
+        ]
     }
 }
