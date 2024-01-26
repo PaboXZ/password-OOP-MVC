@@ -11,6 +11,7 @@ use ReflectionNamedType;
 class Container {
 
     private array $definitions = [];
+    private array $resolved = [];
 
     public function add(array $newDefinitions){
         $this->definitions = [...$this->definitions, ...$newDefinitions];
@@ -51,8 +52,14 @@ class Container {
         if(!array_key_exists($className, $this->definitions))
             throw new ContainerException("Class {$className} is not registered in container class");
 
+        if(array_key_exists($className, $this->resolved))
+            return $this->resolved[$className];
+
         $factory = $this->definitions[$className];
+
         $depedency = $factory();
+        $this->resolved[$className] = $depedency;
+
         return $depedency;
     }
 }

@@ -6,6 +6,8 @@ namespace Framework;
 
 class TemplateEngine{
 
+    private array $globalData = [];
+
     public function __construct(private string $basePath){
 
     }
@@ -13,7 +15,8 @@ class TemplateEngine{
     public function render(string $path, array $data = []){
 
         extract($data, EXTR_SKIP);
-
+        extract($this->globalData, EXTR_SKIP);
+        
         ob_start();
 
         require $this->resolve($path);
@@ -28,5 +31,9 @@ class TemplateEngine{
 
     private function resolve(string $path): string {
         return "{$this->basePath}/{$path}";
+    }
+
+    public function addGlobalData(string $key, mixed $value){
+        $this->globalData[$key] = $value;
     }
 }

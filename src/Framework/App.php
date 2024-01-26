@@ -39,4 +39,8 @@ class App{
     public function status() {
         echo 'Running Mose Password Generator';
     }
+
+    public function addMiddleware(string $middleware){
+        $this->router->addMiddleware($middleware);
+    }
 }
