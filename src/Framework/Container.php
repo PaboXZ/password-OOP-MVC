@@ -52,6 +52,7 @@ class Container {
         if(!array_key_exists($className, $this->definitions))
             throw new ContainerException("Class {$className} is not registered in container class");
 
+
         if(array_key_exists($className, $this->resolved))
             return $this->resolved[$className];
 
@@ -59,7 +60,8 @@ class Container {
 
         $depedency = $factory();
         $this->resolved[$className] = $depedency;
-
+        
         return $depedency;
+
     }
 }

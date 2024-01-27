@@ -8,3 +8,7 @@ function dd(mixed $var){
     echo '</pre>';
     exit;
 }
+
+function e(string $value){
+    return htmlentities($value);
+}
