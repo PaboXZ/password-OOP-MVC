@@ -15,6 +15,7 @@
             <input name="confirmPassword" type="text" />
             <input type="submit" />
             <?php isset($errors) ? var_dump($errors) : "" ?>
+            <?php isset($oldFormData) ? var_dump($oldFormData) : "" ?>
         </form>
     </body>
 </html>
