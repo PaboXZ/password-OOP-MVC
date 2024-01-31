@@ -12,3 +12,9 @@ function dd(mixed $var){
 function e(string $value){
     return htmlentities($value);
 }
+
+function redirectTo(string $path){
+    header("Location: {$path}");
+    http_response_code(302);
+    exit;
+}
