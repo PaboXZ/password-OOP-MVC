@@ -47,7 +47,7 @@ class Container {
         if(!array_key_exists($className, $this->definitions))
             throw new ContainerException("Definition for {$className} does not exists");
 
-        return $this->definitions[$className]();
+        return $this->definitions[$className]($this);
         
     }
 

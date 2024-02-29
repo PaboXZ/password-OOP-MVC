@@ -19,5 +19,7 @@
             "email": "56080591+PaboXZ@users.noreply.github.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
 }
