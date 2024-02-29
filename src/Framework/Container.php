@@ -4,64 +4,54 @@ declare(strict_types=1);
 
 namespace Framework;
 
-use ReflectionClass;
 use Framework\Exceptions\ContainerException;
+use ReflectionClass;
 use ReflectionNamedType;
 
 class Container {
-
+    
     private array $definitions = [];
-    private array $resolved = [];
 
-    public function add(array $newDefinitions){
-        $this->definitions = [...$this->definitions, ...$newDefinitions];
-    }
-
-    public function resolve($className){
-
-        $reflectionClass = new ReflectionClass($className);
+    public function resolve($class){
+        $reflectionClass = new ReflectionClass($class);
 
         if(!$reflectionClass->isInstantiable())
-            throw new ContainerException("Cannot instantiate class {$className}. Not instantiable");
+            throw new ContainerException("Class {$class} is not instantiable");
 
-        $constructor = $reflectionClass->getConstructor();
-        $parameters = $constructor->getParameters();
+        $reflectionConstructor = $reflectionClass->getConstructor();
 
-        if(count($parameters) === 0)
-            return new $className;
+        if(!$reflectionConstructor)
+            throw new ContainerException("Missing constructor for {$class} class");
 
-        $depedencies = [];
+        $reflectionParameters = $reflectionConstructor->getParameters();
 
-        foreach($parameters as $parameter){
+        $dependencies = [];
+
+        foreach($reflectionParameters as $parameter){
             $name = $parameter->getName();
             $type = $parameter->getType();
 
             if(!$type)
-                throw new ContainerException("Cannot instantiate class {$className}, parameter {$name} is missing type");
+                throw new ContainerException("No type given to {$name} parameter for {$class} class");
 
-            if(!$type instanceof ReflectionNamedType)
-                throw new ContainerException("Invalid parameter type, class: {$className}, parameter: {$name}");
+            if(!$type instanceof ReflectionNamedType || $type->isBuiltin())
+                throw new ContainerException("Invalid data type for parameter {$name} in class {$class}");
 
-            $depedencies[] = $this->get($type->getName());
+            $dependencies[$name] = $this->get($type->getName());
         }
 
-        return $reflectionClass->newInstanceArgs($depedencies);
+        return $reflectionClass->newInstanceArgs($dependencies);
     }
 
-    private function get($className){
+    public function get($className){
         if(!array_key_exists($className, $this->definitions))
-            throw new ContainerException("Class {$className} is not registered in container class");
+            throw new ContainerException("Definition for {$className} does not exists");
 
-
-        if(array_key_exists($className, $this->resolved))
-            return $this->resolved[$className];
-
-        $factory = $this->definitions[$className];
-
-        $depedency = $factory();
-        $this->resolved[$className] = $depedency;
+        return $this->definitions[$className]();
         
-        return $depedency;
+    }
 
+    public function addDefinitions(array $newDefinitions){
+        $this->definitions = [...$this->definitions, ...$newDefinitions];
     }
 }

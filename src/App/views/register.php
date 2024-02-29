@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-    </head>
-    <body>
-        <form method="POST">
-            <input name="name" type="text" />
-            <input name="age" type="text" />
-            <input name="email" type="text" />
-            <input name="password" type="text" />
-            <input name="confirmPassword" type="text" />
-            <input type="submit" />
-            <?php isset($errors) ? var_dump($errors) : "" ?>
-            <?php isset($oldFormData) ? var_dump($oldFormData) : "" ?>
+<?php include $this->resolve('partials/_head.php'); ?>
+<?php include $this->resolve('partials/_header.php'); ?>
+<div class="container">
+    <main>
+        <form method="POST" class="box-small-size">
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" />
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" />
+            <label for="passwordConfirm">Confirm password:</label>
+            <input type="password" id="passwordConfirm" name="passwordConfirm" />
+            <label><input type="checkbox" name="tos" /> Accept terms of service</label>
+            <button type="sumbit">Register</button>
         </form>
-    </body>
-</html>
+    </main>
+</div>
+<?php include $this->resolve('partials/_footer.php'); ?>

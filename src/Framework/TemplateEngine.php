@@ -4,22 +4,20 @@ declare(strict_types=1);
 
 namespace Framework;
 
-class TemplateEngine{
-
-    private array $globalData = [];
+class TemplateEngine {
+    private array $globalTemplateData = [];
 
     public function __construct(private string $basePath){
 
     }
 
     public function render(string $path, array $data = []){
-
         extract($data, EXTR_SKIP);
-        extract($this->globalData, EXTR_SKIP);
-        
+        extract($this->globalTemplateData, EXTR_SKIP);
+
         ob_start();
 
-        require $this->resolve($path);
+        include $this->resolve($path);
 
         $output = ob_get_contents();
 
@@ -29,11 +27,11 @@ class TemplateEngine{
 
     }
 
-    private function resolve(string $path): string {
+    public function resolve(string $path){
         return "{$this->basePath}/{$path}";
     }
 
-    public function addGlobalData(string $key, mixed $value){
-        $this->globalData[$key] = $value;
-    }
+    public function addGlobal(string $key, mixed $value){
+        $this->globalTemplateData[$key] = $value;
+    } 
 }

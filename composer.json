@@ -1,16 +1,22 @@
 {
     "name": "pk/password",
+    "description": "Password Manager",
     "type": "project",
     "license": "MIT",
-    "require": {},
     "autoload": {
         "psr-4": {
-            "App\\": "src/App",
-            "Framework\\": "src/Framework"
+            "Framework\\": "src/Framework",
+            "App\\": "src\\App"
         },
         "files": [
-            "src/App/Config/Routes.php",
-            "src/App/Config/Middleware.php"
+            "src/App/Config/Routes.php"
         ]
-    }
+    },
+    "authors": [
+        {
+            "name": "PaboXZ",
+            "email": "56080591+PaboXZ@users.noreply.github.com"
+        }
+    ],
+    "require": {}
 }

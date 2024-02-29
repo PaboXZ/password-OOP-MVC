@@ -1,3 +1,7 @@
 <?php
 
-include __DIR__ . '/../src/App/bootstrap.php';
+include "../src/App/functions.php";
+
+$app = include "../src/App/bootstrap.php";
+
+$app->run();

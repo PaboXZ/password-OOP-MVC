@@ -6,13 +6,13 @@ namespace App\Controllers;
 
 use Framework\TemplateEngine;
 
-class AuthController {
-
+class PanelController {
+    
     public function __construct(private TemplateEngine $view){
 
     }
 
-    public function registerView(){
-        echo $this->view->render('register.php');
-    }    
+    public function view(){
+        echo $this->view->render('index.php');
+    }
 }
