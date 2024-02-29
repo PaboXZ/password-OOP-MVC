@@ -26,13 +26,13 @@ class App {
     }
 
     public function get(string $path, array $controller){
-        $this->router->add($path, 'GET', $controller);
+        return $this->router->add($path, 'GET', $controller);
     }
     public function post(string $path, array $controller){
-        $this->router->add($path, 'POST', $controller);
+        return $this->router->add($path, 'POST', $controller);
     }
     public function delete(string $path, array $controller){
-        $this->router->add($path, 'DELETE', $controller);
+        return $this->router->add($path, 'DELETE', $controller);
     }
 
     public function addMiddleware(string $middleware){

@@ -6,6 +6,7 @@ namespace App\Config;
 
 use Framework\App;
 use App\Controllers\{AuthController, PanelController};
+use App\Middlewares\SessionMiddleware;
 
 function registerRoutes(App $app){
     $app->get('/', [PanelController::class, 'view']);
