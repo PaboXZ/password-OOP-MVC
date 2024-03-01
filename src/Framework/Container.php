@@ -11,6 +11,7 @@ use ReflectionNamedType;
 class Container {
     
     private array $definitions = [];
+    private array $resolved = [];
 
     public function resolve($class){
         $reflectionClass = new ReflectionClass($class);
@@ -44,10 +45,16 @@ class Container {
     }
 
     public function get($className){
+        if(array_key_exists($className, $this->resolved)){
+            return $this->resolved[$className];
+        }
         if(!array_key_exists($className, $this->definitions))
             throw new ContainerException("Definition for {$className} does not exists");
 
-        return $this->definitions[$className]($this);
+        $depedency = $this->definitions[$className]($this);
+
+        $this->resolved[$className] = $depedency;
+        return $depedency;
         
     }
 
