@@ -25,6 +25,7 @@ class Validator {
         foreach($rules as $fieldName => $ruleSet){
             
             foreach($ruleSet as $rule){
+                $params = [];
 
                 if(str_contains($rule, ':')){
                     [$rule, $params] = explode(':', $rule);
@@ -32,7 +33,7 @@ class Validator {
                 }
 
                 if(!$this->rules[$rule]->validate($data, $fieldName, $params ?? []))
-                    $errors[$fieldName][] = $this->rules[$rule]->getMessage($data, $fieldName, $params ?? []);
+                    $errors[$fieldName][] = $this->rules[$rule]->getMessage($data, $fieldName, $params);
 
             }
 

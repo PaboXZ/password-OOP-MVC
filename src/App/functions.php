@@ -12,3 +12,7 @@ function redirectTo(string $path){
     header("Location: {$path}");
     exit;
 }
+
+function e(string $data){
+    return htmlspecialchars($data);
+}
