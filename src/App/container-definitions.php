@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-use Framework\{TemplateEngine, Container};
+use Framework\{TemplateEngine, Container, Validator};
 use App\Config\Paths;
 use App\Services\UserService;
+use App\Services\ValidatorService;
 use Framework\Database;
 
 return [
@@ -15,8 +16,13 @@ return [
         $_ENV['DB_USER'],
         $_ENV['DB_PASSWORD']
     ),
+    Validator::class => fn () => new Validator,
     UserService::class => function (Container $container) {
         $database = $container->get(Database::class);
         return new UserService($database);
+    },
+    ValidatorService::class => function (Container $container) {
+        $validator = $container->get(Validator::class);
+        return new ValidatorService($validator);
     }
 ];
