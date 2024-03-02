@@ -6,6 +6,7 @@ namespace App\Controllers;
 
 use App\Services\UserService;
 use App\Services\ValidatorService;
+use Framework\Exceptions\ValidatorException;
 use Framework\TemplateEngine;
 
 class AuthController {
@@ -24,6 +25,27 @@ class AuthController {
     }
 
     public function register(){
-        $this->validatorService->validateRegister();
+        $this->validatorService->validateRegister($_POST);
+
+        $errors = [];
+
+        if($this->userService->isLoginTaken($_POST['login']))
+            $errors['login'][] = "Login already taken";
+
+        if($this->userService->isEmailTaken($_POST['email']))
+            $errors['email'][] = "Email already registered";
+
+        if(!empty($errors))
+            throw new ValidatorException($errors);
+
+        $this->userService->create($_POST);
+
+        $this->login();
+
+        redirectTo('/');
+    }
+
+    public function login(){
+
     }
 }
