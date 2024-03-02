@@ -29,4 +29,8 @@ class UserService {
             'passwordHash' => $passwordHash
         ]);
     }
+
+    public function getUser($data){
+        return $this->database->query("SELECT * FROM users WHERE login = :login", ['login' => $data['login']])->find();
+    }
 }

@@ -42,10 +42,33 @@ class AuthController {
 
         $this->login();
 
+        session_regenerate_id();
+
         redirectTo('/');
     }
 
-    public function login(){
+    public function loginView(){
+        echo $this->view->render('/login.php');
+    }
 
+    public function login(){
+        $user = $this->userService->getUser($_POST);
+        
+        if(!$user)
+            throw new ValidatorException(['password' => ["Invalid credentials"]]);
+
+        if(!password_verify($_POST['password'], $user['password_hash']))
+            throw new ValidatorException(['password' => ["Invalid credentials"]]);
+
+        $_SESSION['user'] = $user['id'];
+
+        session_regenerate_id();
+
+        redirectTo('/');
+    }
+
+    public function logout(){
+        session_destroy();
+        redirectTo('/login');
     }
 }

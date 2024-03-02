@@ -17,8 +17,8 @@ class ValidatorService {
         $this->validator->addRule('containsCharacterSet', new ContainsCharacterSetRule);
     }
 
-    public function validateRegister(){
-        $this->validator->validate($_POST, [
+    public function validateRegister(array $data){
+        $this->validator->validate($data, [
             'login' => ['required', 'lengthIn:3,20'],
             'email' => ['required', 'isEmail'],
             'password' => ['required', 'lengthIn:8,64', 'containsCharacterSet:aA1#'],

@@ -27,7 +27,7 @@
             <?php if(isset($errors['tos'])): ?>
                 <div class="error-field"><?=$errors['tos'][0];?></div>
             <?php endif; ?>
-            <button type="sumbit">Register</button>
+            <button type="sumbit" class="button-mid">Register</button>
         </form>
     </main>
 </div>
