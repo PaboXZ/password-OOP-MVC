@@ -27,22 +27,9 @@ class AuthController {
     public function register(){
         $this->validatorService->validateRegister($_POST);
 
-        $errors = [];
+        $this->userService->register($_POST);
 
-        if($this->userService->isLoginTaken($_POST['login']))
-            $errors['login'][] = "Login already taken";
-
-        if($this->userService->isEmailTaken($_POST['email']))
-            $errors['email'][] = "Email already registered";
-
-        if(!empty($errors))
-            throw new ValidatorException($errors);
-
-        $this->userService->create($_POST);
-
-        $this->login();
-
-        session_regenerate_id();
+        $this->userService->login($_POST);
 
         redirectTo('/');
     }
@@ -52,23 +39,16 @@ class AuthController {
     }
 
     public function login(){
-        $user = $this->userService->getUser($_POST);
-        
-        if(!$user)
-            throw new ValidatorException(['password' => ["Invalid credentials"]]);
+        $this->validatorService->validateLogin($_POST);
 
-        if(!password_verify($_POST['password'], $user['password_hash']))
-            throw new ValidatorException(['password' => ["Invalid credentials"]]);
-
-        $_SESSION['user'] = $user['id'];
-
-        session_regenerate_id();
+        $this->userService->login($_POST);
 
         redirectTo('/');
     }
 
     public function logout(){
         session_destroy();
+        
         redirectTo('/login');
     }
 }

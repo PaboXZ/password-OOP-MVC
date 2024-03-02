@@ -27,4 +27,11 @@ class ValidatorService {
         ]);
         
     }
+
+    public function validateLogin(array $data){
+        $this->validator->validate($data, [
+            'login' => ['required'],
+            'password' => ['required']
+        ]);
+    }
 }
