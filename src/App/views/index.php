@@ -9,15 +9,23 @@
             <div class="password-tile">
                 <div class="password-tile-name"><?= $password['password_name']; ?></div>
                 <div class="password-tile-actions">
-                    <div class="password-tile-action button-small"><img class="action-icon" src="assets/img/copy.png" /></div>
-                    <div class="password-tile-action button-small"><img class="action-icon" src="assets/img/view.png" /></div>
-                    <div class="password-tile-action button-small"><img class="action-icon" src="assets/img/edit.png" /></div>
-                    <div class="password-tile-action button-small"><img class="action-icon" src="assets/img/delete.png" /></div>
+                    <!--COPY BTN-->
+                    <button class="password-tile-action button-small"><img class="action-icon" src="assets/img/copy.png" /></button>
+                    <!--VIEW BTN-->
+                    <button class="password-tile-action button-small"><img class="action-icon" src="assets/img/view.png" /></button>
+                    <!--EDIT BTN-->
+                    <button class="password-tile-action button-small"><img class="action-icon" src="assets/img/edit.png" /></button>
+                    <!--DELETE BTN -->
+                    <form method="POST" action="delete-password/<?= $password['id'] ?>">
+                        <?php include $this->resolve('partials/_csrf.php'); ?>
+                        <?php include $this->resolve('partials/_delete.php'); ?>
+                        <button class="password-tile-action button-small"><img class="action-icon" src="assets/img/delete.png" /></button>
+                    </form>
                 </div>
             </div>
             <?php endforeach; ?>
             <div class="password-tile">
-                <div class="password-tile-name"><form method="POST" id="add-password" action='/addPassword'><input type="hidden" name="_CSRF" value="<?= $_SESSION['token']?>" /><input class="input-invisible" type="text" placeholder="Add new..." name="passwordName" /></form></div>
+                <div class="password-tile-name"><form method="POST" id="add-password" action='/add-password'><?php include $this->resolve('partials/_csrf.php'); ?><input class="input-invisible" type="text" placeholder="Add new..." name="passwordName" /></form></div>
                 <div class="password-tile-actions">
                     <button form="add-password" class="password-tile-action button-small"><img class="action-icon" src="assets/img/plus.png" />
                 </div>

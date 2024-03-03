@@ -23,5 +23,9 @@ class PasswordsController {
         redirectTo('/');
     }
 
+    public function deletePassword(array $params){
+        $this->passwordsService->delete($params['passwordID']);
 
+        redirectTo('/');
+    }
 }

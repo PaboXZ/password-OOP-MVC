@@ -29,6 +29,21 @@ class PasswordsService {
         ]);
     }
 
+    public function delete(string $passwordID){
+        if(!$this->database->query("SELECT * FROM passwords WHERE user_id = :userID AND id = :passwordID",
+        [
+            'userID' => $_SESSION['user'],
+            'passwordID' => $passwordID
+        ])->count())
+            redirectTo('/');
+
+        $this->database->query("DELETE FROM passwords WHERE id = :passwordID",
+        [
+            'passwordID' => $passwordID
+        ]);
+
+    }
+
     public function getPasswords(){
         $passwords = $this->database->query("SELECT * FROM passwords WHERE user_id = :userID" , ['userID' => $_SESSION['user']])->findAll();
 

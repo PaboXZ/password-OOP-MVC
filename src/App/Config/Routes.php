@@ -20,5 +20,6 @@ function registerRoutes(App $app){
 
     $app->get('/logout', [AuthController::class, 'logout'])->addRouteMiddleware(UserOnlyMiddleware::class);
 
-    $app->post('/addPassword', [PasswordsController::class, 'addPassword'])->addRouteMiddleware(UserOnlyMiddleware::class);
+    $app->post('/add-password', [PasswordsController::class, 'addPassword'])->addRouteMiddleware(UserOnlyMiddleware::class);
+    $app->delete('/delete-password/{passwordID}', [PasswordsController::class, 'deletePassword'])->addRouteMiddleware(UserOnlyMiddleware::class);
 }

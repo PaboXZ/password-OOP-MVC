@@ -14,6 +14,7 @@
                 <div class="error-field"><?=$errors['password'][0];?></div>
             <?php endif; ?>
             <button type="sumbit" class="button-mid">Login</button>
+            <?php include $this->resolve('partials/_csrf.php'); ?>
         </form>
     </main>
 </div>

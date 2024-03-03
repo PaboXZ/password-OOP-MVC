@@ -204,7 +204,8 @@ header {
 }
 .password-tile-action{
     white-space: nowrap;
-    line-height: 0;  
+    line-height: 0;
+    cursor: pointer;
 }
 /*Footer*/
 @media(min-width: 400px) {

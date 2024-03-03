@@ -28,6 +28,7 @@
                 <div class="error-field"><?=$errors['tos'][0];?></div>
             <?php endif; ?>
             <button type="sumbit" class="button-mid">Register</button>
+            <?php include $this->resolve('partials/_csrf.php'); ?>
         </form>
     </main>
 </div>
