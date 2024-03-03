@@ -117,7 +117,8 @@ header {
 }
 
 .box-full-size {
-    margin: 0 2rem;
+    max-width: 90vw;
+    margin: 4rem auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -169,10 +170,41 @@ header {
     background-color:rgb(150, 150, 150);
     border-radius: 2px;
 }
+.input-invisible{
+    background-color: inherit;
+    border: none;
+    font-family: inherit;
+}
 
 .password-tile {
+    padding: 1rem;
     min-width: 10rem;
     background-color: gray;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: 1rem;
+}
+.password-tile-name{
+    border-top: var(--border-top-small);
+    border-bottom: var(--border-bottom-small);
+    border-right: var(--border-right-small);
+    border-left: var(--border-left-small);
+    padding: .4rem;
+    background-color: var(--button-background-color);  
+}
+.password-tile-actions{
+    display: flex;
+    justify-content: space-evenly;
+    gap: .5rem;
+}
+.action-icon{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.password-tile-action{
+    white-space: nowrap;
+    line-height: 0;  
 }
 /*Footer*/
 @media(min-width: 400px) {

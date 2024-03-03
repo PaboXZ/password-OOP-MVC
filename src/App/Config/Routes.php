@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Config;
 
 use Framework\App;
-use App\Controllers\{AuthController, PanelController};
+use App\Controllers\{AuthController, PanelController, PasswordsController};
 
 use App\Middlewares\{GuestOnlyMiddleware, UserOnlyMiddleware};
 
@@ -19,4 +19,6 @@ function registerRoutes(App $app){
     $app->post('/login', [AuthController::class, 'login'])->addRouteMiddleware(GuestOnlyMiddleware::class);
 
     $app->get('/logout', [AuthController::class, 'logout'])->addRouteMiddleware(UserOnlyMiddleware::class);
+
+    $app->post('/addPassword', [PasswordsController::class, 'addPassword'])->addRouteMiddleware(UserOnlyMiddleware::class);
 }

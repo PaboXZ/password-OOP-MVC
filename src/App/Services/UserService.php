@@ -31,8 +31,12 @@ class UserService {
         ]);
     }
 
-    public function getUser($data){
+    public function getUser(array $data){
         return $this->database->query("SELECT * FROM users WHERE login = :login", ['login' => $data['login']])->find();
+    }
+    
+    public function getUserByID(string $userID){
+        return $this->database->query("SELECT * FROM users WHERE id = :userID", ['userID' => $userID])->find();
     }
 
     public function login(array $data){
@@ -46,6 +50,7 @@ class UserService {
             throw new ValidatorException(['password' => ["Invalid credentials"]]);
 
         $_SESSION['user'] = $user['id'];
+        $_SESSION['userPassword'] = $data['password'];
 
         session_regenerate_id();
     }

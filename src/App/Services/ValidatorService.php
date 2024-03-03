@@ -34,4 +34,10 @@ class ValidatorService {
             'password' => ['required']
         ]);
     }
+
+    public function validateAddPassword(array $data){
+        $this->validator->validate($data, [
+            'passwordName' => ['required', 'lengthIn:3,20']
+        ]);
+    }
 }
