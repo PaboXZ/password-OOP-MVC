@@ -22,4 +22,7 @@ function registerRoutes(App $app){
 
     $app->post('/add-password', [PasswordsController::class, 'addPassword'])->addRouteMiddleware(UserOnlyMiddleware::class);
     $app->delete('/delete-password/{passwordID}', [PasswordsController::class, 'deletePassword'])->addRouteMiddleware(UserOnlyMiddleware::class);
+    
+    $app->post('/regenerate-password/{passwordID}', [PasswordsController::class, 'regeneratePassword'])->addRouteMiddleware(UserOnlyMiddleware::class);
+    $app->post('/edit-password/{passwordID}', [PasswordsController::class, 'editPassword'])->addRouteMiddleware(UserOnlyMiddleware::class);
 }

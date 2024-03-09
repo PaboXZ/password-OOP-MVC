@@ -25,6 +25,22 @@
     --border-bottom-small: 3px solid #363636;
     --border-left-small: 3px solid #030303;
 
+    --password-color-1: #ccc;
+    --password-color-2: #666;
+    --password-color-3: #c77;
+    --password-color-4: #cc7;
+    --password-color-5: #7c7;
+    --password-color-6: #7cc;
+    --password-color-7: #77c;
+    --password-color-8: #c7c;
+    --password-color-9: #999;
+    --password-color-10: #333;
+    --password-color-11: #822;
+    --password-color-12: #882;
+    --password-color-13: #282;
+    --password-color-14: #288;
+    --password-color-15: #228;
+    --password-color-16: #828;
 }
 
 * {
@@ -45,7 +61,8 @@ body {
     border-right: var(--border-right-small);
     border-left: var(--border-left-small);
 
-    background-color: var(--button-background-color);   
+    background-color: var(--button-background-color);  
+    font-family: "Pixelify Sans", sans-serif; 
 }
 
 .button-mid {
@@ -85,6 +102,23 @@ body {
 
 }
 
+.background-confirm{
+    background-color: rgb(114, 207, 114);
+}
+.background-confirm:hover,
+.background-confirm:focus
+ {
+    background-color: rgb(90, 163, 90);
+}
+.background-cancel{
+    background-color: rgb(223, 111, 111);
+}
+.background-cancel:hover,
+.background-cancel:focus
+{
+    background-color: rgb(184, 93, 93);
+}
+
 /*Header*/
 header {
     padding: 0 1rem;
@@ -98,6 +132,12 @@ header {
     border-bottom: var(--border-bottom-big);
     border-right: var(--border-right-big);
     border-left: var(--border-left-big);
+
+    background-color: white;
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header-logo {
@@ -160,9 +200,11 @@ header {
     cursor: pointer;
     font-family: "Pixelify Sans", sans-serif;
 }
-.box-small-size > button:hover {
-}
-.box-small-size > button:focus {
+.box-mid-size {
+    margin: 4rem auto;
+    background-color: gray;
+    width: 70%;
+    height: 40vh;
 }
 .error-field {
     padding: .1rem .5rem;
@@ -174,6 +216,15 @@ header {
     background-color: inherit;
     border: none;
     font-family: inherit;
+}
+.overlay {
+    width: 100%;
+    height: 100svh;
+    position: fixed;
+    top: calc(2.75rem + 20px);
+    left: 0;
+    background-color: rgba(177, 177, 177, 0.64);
+    display: none;
 }
 
 .password-tile {
@@ -207,6 +258,64 @@ header {
     line-height: 0;
     cursor: pointer;
 }
+
+.hidden-password{
+    display: none;
+}
+
+.spread-items{
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 4fr 5fr;
+}
+.grid-two-col{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.grid-expandable{
+    grid-template-rows: 0fr 0fr;
+    gap: 0;
+    overflow: hidden;
+    transition: grid-template-rows .2s ease-in, gap .2s ease-in;
+}
+
+.span-two-col{
+    grid-column: 1 / span 2;
+    overflow: hidden;
+}
+.overflow-hidden{
+    overflow:hidden;
+}
+#color-picker-button{
+    height: 1.8rem;
+    width: 1.8rem;
+}
+.color-picker-radio
+ {
+    appearance: none;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 2px;
+    border: 2px solid gray;
+    background: white;
+}
+.color-picker-radio:checked{
+    outline: 2px solid red;
+}
+.color-picker-grid{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: .5rem;
+}
+.colspan-4{
+    grid-column: span 4;
+}
+
+.colspan-8{
+    grid-column: span 8;
+}
+
 /*Footer*/
 @media(min-width: 400px) {
     /*Header*/

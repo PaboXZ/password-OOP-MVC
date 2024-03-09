@@ -40,4 +40,10 @@ class ValidatorService {
             'passwordName' => ['required', 'lengthIn:3,20']
         ]);
     }
+
+    public function validateEditPasswordName(array $data){
+        $this->validator->validate($data, [
+            'passwordName' => ['lengthIn:3,20']
+        ]);
+    }
 }

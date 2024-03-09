@@ -28,4 +28,30 @@ class PasswordsController {
 
         redirectTo('/');
     }
+
+    public function regeneratePassword(array $params){
+        $this->passwordsService->regeneratePassword($params['passwordID']);
+        redirectTo('/');
+    }
+
+    public function editPassword(array $params){
+        if(!empty($_POST['passwordName'])){
+            $this->validatorService->validateEditPasswordName($_POST);
+            $this->passwordsService->editPasswordName($_POST['passwordName'], $params['passwordID']);
+        }
+
+        if(isset($_POST['password-color-typed'])){
+            if(preg_match('#^[a-f0-9]{3}$#', $_POST['password-color-typed'])){
+                $this->passwordsService->editPasswordColor($_POST['password-color-typed'], $params['passwordID']);
+                redirectTo('/');
+            }
+        }
+        
+        if(isset($_POST['password-color'])){
+            if(preg_match('#^[a-f0-9]{3}$#', $_POST['password-color'])){
+                $this->passwordsService->editPasswordColor($_POST['password-color'], $params['passwordID']);
+            }
+        }
+        redirectTo('/');
+    }
 }
