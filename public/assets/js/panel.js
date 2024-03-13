@@ -116,6 +116,17 @@ function closeViewPopup() {
 
 function closeEditPopup() {
     document.getElementById('edit-popup').style.cssText = 'display: none';
+
+    let colorInputs = document.getElementsByClassName('color-picker-radio');
+    let typedInput = document.getElementById('password-color-typed');
+
+    for(input of colorInputs){
+        if(input.checked === true)
+            input.checked = false;
+    }
+
+    typedInput.value = '';
+    document.getElementById('password-color-typed-error').innerText = '';
 }
 
 function openRegeneratePasswordForm(){
@@ -139,11 +150,11 @@ function updateColorButton () {
     if(typedInput.value !== ''){
         if(typedInput.value.match('^[a-f0-9]{3}$'))
             color = typedInput.value;
-        else
+        else{
             document.getElementById('password-color-typed-error').innerText = 'Invalid Format. (example: f23)';
+            color = '';
+        }
     }
-
-    console.log(color);
     
     if(color !== ''){
         document.getElementById('color-picker-button').style.cssText = `background-color: #${color};`;

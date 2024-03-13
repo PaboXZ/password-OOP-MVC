@@ -78,7 +78,7 @@
                     <input class="color-picker-radio" type="radio" name="password-color" value="228"/>
                     <input class="color-picker-radio" type="radio" name="password-color" value="828"/>
                     <label class="colspan-4" for="password-color-typed">RGB 12bit:</label>
-                    <input class="colspan-4" type="text" pattern="^[0-9a-f]{3}$" name="password-color-typed" id="password-color-typed"/>
+                    <input class="colspan-4" type="text" name="password-color-typed" id="password-color-typed"/>
                     <div id="password-color-typed-error" class="colspan-8"></div>
                     <button type="button" class="colspan-4 button-small" id="color-picker-pick-color">pick</button>
                     <button type="button" class="colspan-4 button-small" id="color-picker-close-button">cancel</button>
